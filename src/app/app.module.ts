@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -18,7 +18,9 @@ import { LoginComponent } from './login/login.component';
 import { PanierComponent } from './panier/panier.component';
 import { ProductsComponent } from './products/products.component';
 import { TitreetsoutitreComponent } from './titreetsoutitre/titreetsoutitre.component';
-
+import { BackEndService } from './service/back-end.service';
+import { MessagesService } from './service/messages.service';
+import { DatashareService } from './service/datashare.service';
 
 @NgModule({
   declarations: [
@@ -40,9 +42,12 @@ import { TitreetsoutitreComponent } from './titreetsoutitre/titreetsoutitre.comp
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [BackEndService, MessagesService, DatashareService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

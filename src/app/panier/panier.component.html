@@ -1,6 +1,6 @@
 <div class="container">
            <div class="panel panel-primary">
-               <div class="panel-heading">
+               <div class="panel-heading">	
                    <h3>{{titrePage}}</h3>
                    <p class="lead">{{sousTitrePage}}</p>
                </div>
@@ -20,11 +20,11 @@
                            <tbody id="contenant">
                            
                                <tr *ngFor="let book of books">
-                                   <td><img style="max-width: 100px; height: auto;" src=<c:url value="/static/img${book.imagePath}"/> ></td>
+                                   <td><img style="max-width: 100px; height: auto;" src="/static/img{{book.imagePath}}"/> ></td>
                                    <td style="vertical-align: middle;">{{book.bookTitre}}</td>
                                    <td style="vertical-align: middle;">{{book.bookPrice}}<i class="Eglyphicon glyphicon-euro"></i></td>
                                     <td style="vertical-align: middle;">                                   
-                                    	<span  *ngFor="let author of book.author"> {{auteur.authorFirstname}} {{auteur.authorLastname}} |</span>
+                                    	<span  *ngFor="let author of book.authors"> {{author.authorFirstname}} {{author.authorLastname}} |</span>
                                    
                                     </td>
                                     <td style="vertical-align: middle;">{{book.editor.editorName}}</td> 
