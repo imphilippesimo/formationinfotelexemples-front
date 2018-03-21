@@ -39,13 +39,13 @@ export class LoginComponent implements OnInit {
           //cache the logged member in datashare service
           this.dss.loggedMember = data.payload;
           //navigate to home and display navbar or the hidden tabs
-          this.router.navigate(['/home']);
+          //this.router.navigate(['/home']);
           
         }
       },
       error => {
         console.error(error.message);
-        //messageService.displayFailureMessage(error.message);
+        this.messageService.displayErrorMessage(error.message);
       }
 
     );
