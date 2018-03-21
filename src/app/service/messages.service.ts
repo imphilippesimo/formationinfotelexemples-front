@@ -1,27 +1,51 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ComponentFactoryResolver, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { MessagesComponent } from '../messages/messages.component';
+import { DatashareService } from './datashare.service';
+
 
 @Injectable()
 export class MessagesService {
 
-  isDisplayed = true;
-  alertClass = "";
-  message = "";
+  instantiatedComponent: any;
 
-  constructor() { }
+
+  constructor(private router: Router, private componentFactoryResolver: ComponentFactoryResolver, private dss: DatashareService) { }
 
   displayErrorMessage(message: string) {
-    this.message = message;
-    this.alertClass = "alert alert-danger";
+    this.dss.message = message;
+    this.dss.alertMessageClass = "alert alert-danger";
+    this.onDisplayMessage();
+    console.log(this.dss.isMessageDisplayed);
+    console.log(this.dss.alertMessageClass);
+    console.log(this.dss.message);
+
   }
 
   displaySuccessfullMessage(message: string) {
-    this.message = message;
-    this.alertClass = "alert alert-success";
+    this.dss.message = message;
+    this.dss.alertMessageClass = "alert alert-success";
+    this.onDisplayMessage();
   }
 
   displayWarningMessage(message: string) {
-    this.message = message;
-    this.alertClass = "alert alert-warning";
+    this.dss.message = message;
+    this.dss.alertMessageClass = "alert alert-warning";
+    this.onDisplayMessage();
+  }
+
+  private onDisplayMessage() {
+    console.log("trying to display message");
+    console
+      .log(this.dss.messageViewContainerRef);
+
+    let viewContainerRef = this.dss.messageViewContainerRef;
+    if (this.instantiatedComponent)
+      viewContainerRef.remove();
+    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(MessagesComponent);
+    this.instantiatedComponent = viewContainerRef.createComponent(componentFactory);
+
+    // this.router.navigate([{ outlets: { messages: [ 'messages' ] }}]);
   }
 
 }

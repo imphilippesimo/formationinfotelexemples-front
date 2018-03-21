@@ -5,6 +5,7 @@ import { IdentifiantsVM } from '../model/IndentifiantsVM';
 import { HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError, retry } from 'rxjs/operators';
+import {MessagesService} from './messages.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,7 +19,7 @@ export class BackEndService {
   
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private msService: MessagesService) { }
 
 
   Login(identifiantsVm: IdentifiantsVM): Observable<any>
@@ -44,17 +45,17 @@ export class BackEndService {
     }
     // return an ErrorObservable with a user-facing error message
     return new ErrorObservable(
-      'Something bad happened; please try again later.');
+      'Une erreur s\'est produite lors du traitement de votre requête');
     };
 
     handleData(data: any){      
       if(data.success){
         //resquest suceed in server
         console.log(data.message);
-        //messageService.displaySucessfulMessage(data.message);
+        this.msService.displaySuccessfullMessage(data.message);
       }else{
         console.error(data.message);
-        //messageService.displayFailureMessage(data.message);
+        this.msService.displayErrorMessage(data.message);
       }
 
     }
