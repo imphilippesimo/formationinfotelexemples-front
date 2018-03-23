@@ -1,15 +1,14 @@
-<h2>mon compte</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-<table class="table table-hover table-striped">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Bob" formControlName="name">
 
-   <tr>
-       <td>Carmen</td>
-       <td>33 ans</td>
-       <td>Espagne</td>
-   </tr>
-   <tr>
-       <td>Michelle</td>
-       <td>26 ans</td>
-       <td>États-Unis</td>
-   </tr>
-</table>
+        <label for="avatar">Avatar</label>
+        <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+        <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+    </div>
+    <button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Submit
+        <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i>
+    </button>
+</form>

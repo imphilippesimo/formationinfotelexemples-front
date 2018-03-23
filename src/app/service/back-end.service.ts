@@ -9,8 +9,9 @@ import {MessagesService} from './messages.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
-  })
+    'Content-Type':  'application/json',
+    
+  }),withCredentials:true
 }
 
 @Injectable()
@@ -26,6 +27,16 @@ export class BackEndService {
   {
     console.log(identifiantsVm);
     return this.http.post<IdentifiantsVM>("http://localhost:8080/GestionBiblio/member/login", identifiantsVm, httpOptions)
+    .pipe(      
+      retry(3),
+      catchError(this.handleError)
+    );
+  } 
+
+  add(book: any): Observable<any>
+  {
+    
+    return this.http.post("http://localhost:8080/GestionBiblio/book/add", book, httpOptions)
     .pipe(      
       retry(3),
       catchError(this.handleError)

@@ -22,6 +22,7 @@ import { BackEndService } from './service/back-end.service';
 import { MessagesService } from './service/messages.service';
 import { DatashareService } from './service/datashare.service';
 import { MessageDirective } from './directives/message.directive';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MessageDirective } from './directives/message.directive';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule    
   ],
   providers: [BackEndService, MessagesService, DatashareService],
 
